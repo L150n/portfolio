@@ -1,0 +1,4 @@
+# Redirect non-www to www
+https://lison.netlify.app/* https://www.lison.netlify.app/:splat 301!
+# Redirect www to non-www
+https://www.lison.netlify.app/* https://lison.netlify.app/:splat 301!

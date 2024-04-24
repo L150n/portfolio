@@ -235,10 +235,9 @@ body{
     height: 100vh;
 
 }
-.header-content{
+.header-content {
     height: 100vh;
     width: 100%;
-    float: left;
     display: flex;
     position: absolute;
     align-items: center;
@@ -251,33 +250,39 @@ body{
     font-size: 50px;
     z-index: 1;
 }
-.header-content-box{
+
+.header-content-box {
     z-index: 2;
     text-align: center;
-    height: auto;
     padding-right: 60px;
-    width: auto;
+}
 
-}
-.header-content .firstline{
-    z-index: 2;
-    font-weight:700;
+.header-content .firstline {
+    font-weight: 700;
     font-family: poppins;
-    font-size: 65px;
+    font-size: 65px; /* Ensure H1 adopts this style */
+    margin: 0; /* Remove default margin from H1 */
 }
-.header-content .secondline{
-    z-index: 2;
+
+.header-content .firstline h1 {
+    margin: 0; /* Ensures no additional space around the H1 */
+    font-size: inherit; /* Inherits font size from parent if needed */
+}
+
+.header-content .secondline {
     font-size: 30px;
-    padding-top:20px ;
-    font-weight:500;
-    color: rgb(255, 255, 255,.8);
+    padding-top: 20px;
+    font-weight: 500;
+    color: rgb(255, 255, 255, .8);
 }
-.slash{
+
+.slash {
     animation-name: animateslash;
     animation-duration: .8s;
     animation-iteration-count: infinite;
     animation-play-state: running;
 }
+
 @keyframes animateslash{
     0%{
         opacity: 1;

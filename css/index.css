@@ -394,7 +394,7 @@ body{
     transform: scale(1.1);
 }
 #breaker{
-    height: 100vh;
+    height: 100%;
     width: 200%;
     background-color: #c70039;
     opacity: 1;
@@ -1404,7 +1404,7 @@ For devices with smaller width like mobile phone
         display: none;
     }
     #breaker{
-        height: 50vh;
+        height: 100%;
         width: 200%;
         background-color: #c70039;
         opacity: 1;
@@ -1859,7 +1859,7 @@ for tabs and large phones
         display: none;
     }
     #breaker{
-        height: 50vh;
+        height: 100%;
         width: 200%;
         background-color: #c70039;
         opacity: 1;

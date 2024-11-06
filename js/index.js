@@ -190,3 +190,212 @@ $(function(){
   $('.navigation-close').hover(cursorhover,cursor);
 
 })
+$(function() {
+  // Configuration
+  const CONFIG = {
+      animations: {
+          error: {
+              duration: 0.4,
+              shake: [-10, 10, -10, 10, 0],
+              errorColor: 'rgba(255,0,0,0.1)'
+          },
+          success: {
+              duration: 0.3,
+              successColor: 'rgba(0,255,0,0.1)'
+          },
+          reset: {
+              duration: 0.3
+          }
+      },
+      messages: {
+          required: 'This field is required',
+          email: {
+              format: 'Email format is wrong',
+              required: 'Email is required'
+          },
+          success: 'Form submitted successfully!'
+      }
+  };
+
+  // Utility functions
+  function isValidEmail(email) {
+      // More comprehensive email validation regex
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      return emailRegex.test(email);
+  }
+
+  function createTooltip(field, message) {
+      const $tooltip = $('<div>')
+          .addClass('validation-tooltip')
+          .text(message)
+          .css({
+              position: 'absolute',
+              background: 'rgba(255,0,0,0.8)',
+              color: 'white',
+              padding: '5px 10px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              opacity: 0,
+              zIndex: 1000
+          });
+
+      $(field).parent().css('position', 'relative').append($tooltip);
+
+      const fieldOffset = $(field).position();
+      $tooltip.css({
+          top: fieldOffset.top + $(field).outerHeight() + 5,
+          left: fieldOffset.left
+      });
+
+      gsap.to($tooltip, {
+          opacity: 1,
+          y: 5,
+          duration: 0.3
+      });
+
+      return $tooltip;
+  }
+
+  function resetFieldStyle(field) {
+      const $tooltip = $(field).parent().find('.validation-tooltip');
+      if ($tooltip.length) {
+          gsap.to($tooltip, {
+              opacity: 0,
+              duration: CONFIG.animations.reset.duration,
+              onComplete: () => $tooltip.remove()
+          });
+      }
+
+      gsap.to(field, {
+          backgroundColor: 'transparent',
+          duration: CONFIG.animations.reset.duration
+      });
+  }
+
+  function displayError(field, message) {
+      createTooltip(field, message);
+      
+      gsap.to(field, {
+          x: CONFIG.animations.error.shake,
+          duration: CONFIG.animations.error.duration,
+          backgroundColor: CONFIG.animations.error.errorColor
+      });
+  }
+
+  function displaySuccess(field) {
+      gsap.to(field, {
+          backgroundColor: CONFIG.animations.success.successColor,
+          duration: CONFIG.animations.success.duration
+      });
+  }
+
+  function validateEmail(field) {
+      const $field = $(field);
+      const value = $field.val();
+
+      if (!value) {
+          displayError(field, CONFIG.messages.email.required);
+          return false;
+      }
+
+      if (!isValidEmail(value)) {
+          displayError(field, CONFIG.messages.email.format);
+          return false;
+      }
+
+      displaySuccess(field);
+      return true;
+  }
+
+  function validateField(field) {
+      const $field = $(field);
+      const value = $field.val();
+
+      if (!value) {
+          displayError(field, CONFIG.messages.required);
+          return false;
+      }
+
+      displaySuccess(field);
+      return true;
+  }
+
+  // Real-time email validation
+  $('#email').on('input', function() {
+      const $field = $(this);
+      const value = $field.val();
+      
+      if (value && !isValidEmail(value)) {
+          displayError(this, CONFIG.messages.email.format);
+      } else {
+          resetFieldStyle(this);
+      }
+  });
+
+  // Attach reset style to other input fields
+  $('#name, #subject, #body').on('input', function() {
+      resetFieldStyle(this);
+  });
+
+  // Form submission handler
+  $('#submit').on('click', function(e) {
+      e.preventDefault();
+
+      // Gather form data
+      const formData = {
+          name: $('#name').val(),
+          email: $('#email').val(),
+          subject: $('#subject').val(),
+          message: $('#body').val()
+      };
+
+      // Validation
+      let isValid = true;
+      isValid = validateField('#name') && isValid;
+      isValid = validateEmail('#email') && isValid;
+      isValid = validateField('#subject') && isValid;
+      isValid = validateField('#body') && isValid;
+
+      if (!isValid) return;
+
+      // Show success message
+      const $successMessage = $('<div>')
+          .addClass('success-message')
+          .text(CONFIG.messages.success)
+          .css({
+              position: 'fixed',
+              top: '20px',
+              right: '20px',
+              background: 'rgba(0,255,0,0.8)',
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '4px',
+              opacity: 0,
+              zIndex: 1000
+          })
+          .appendTo('body');
+
+      // Animate success message
+      gsap.timeline()
+          .to($successMessage, {
+              opacity: 1,
+              x: -20,
+              duration: 0.5
+          })
+          .to($successMessage, {
+              opacity: 0,
+              x: 20,
+              duration: 0.5,
+              delay: 2,
+              onComplete: () => $successMessage.remove()
+          });
+
+      // Here you would typically send the form data to your server
+      //console.log('Form submitted:', formData);
+      
+      // Reset form
+      $('#name, #email, #subject, #body').val('').each(function() {
+          resetFieldStyle(this);
+      });
+  });
+});

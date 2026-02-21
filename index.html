@@ -11,7 +11,8 @@
     <link rel="canonical" href="https://lison.netlify.app/">
     <link rel="icon" type="image/png" href="images/aklogo.png">
     <link rel="stylesheet" href="css/index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -39,6 +40,7 @@
 
 <body>
     <!--contains all the div-->
+    <div id="vanta-bg"></div>
     <div id="all">
     <!--mouse  follower-->
         <div class="cursor"></div>
@@ -48,12 +50,13 @@
             <span class="color">Lison</span>Sabu 
         </div>
     <!--loader-end-->
-    <!--link-screen-->
-        <div id="breaker">
+    <!--Page Transition Overlay-->
+        <div id="breaker"></div>
+        <div id="breaker-two"></div>
+        <div id="page-transition">
+            <div class="transition-text"></div>
         </div>
-        <div id="breaker-two">
-        </div>
-    <!--link-screen-->
+    <!--Page Transition End-->
         <!--Main-Section-->
         <!--Navigator-fullscreen-->
         <div id="navigation-content">
@@ -76,16 +79,23 @@
         <!--Menubar-->
         <div id="navigation-bar">
             <img src="images/aklogo.png" alt="logo">
-            <div class="menubar" onclick="navigator.vibrate(100)">
-                <span class="first-span"></span>
-                <span class="second-span"></span>
-                <span class="third-span"></span>
+            <div class="nav-right-controls">
+                <div class="terminal-toggle" id="terminal-toggle" onclick="navigator.vibrate(100)" title="Open Terminal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                </div>
+                <div class="menubar" onclick="navigator.vibrate(100)">
+                    <span class="first-span"></span>
+                    <span class="second-span"></span>
+                    <span class="third-span"></span>
+                </div>
             </div>
         </div>
         <!--Menubar End-->
           <!--Header-->
         <div id="header">
-            <div id="particles"></div>
               <!--Social Media Links-->
             <div class="social-media-links">
                <a href="https://www.instagram.com/_l1s0n_/" onclick="navigator.vibrate(100)"><img src="images/instagram logo.png" class="social-media" alt="Follow Lison Sabu on Instagram"></a><!--Your instagram homepage link inser in place of "#"-->
@@ -123,36 +133,7 @@
         <!--Main-Section End-->
         <!--about-->
         <div id="about" onclick="navigator.vibrate(100)">
-            <div class="color-changer">
-            <div class="color-panel">
-                <img src="images/gear.png" alt="">
-            </div>
-            <div class="color-selector">
-                <div class="heading">Custom Colors</div>
-                <div class="colors">
-                    <ul >
-                    <li>
-                        <a href="#0" class="color-red " title="color-red"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-purple" title="color-purple"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-malt" title="color-malt"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-green" title="color-green"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-blue" title="color-blue"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-orange" title="color-orange"></a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-            </div>
+
             <!--about content-->
             <div id="about-content">
                 <div class="about-header">
@@ -160,19 +141,16 @@
                     <span class ="header-caption">Get to Know <span class="color"> me.</span></span>
                 </div>
                 <div class="about-main">
-            <div class="about-first-paragraph wow">
-            <!--about description-->
-               <span class="about-first-line">
-                    I'm Aspiring 
-                    <span class="color">Full Stack Dev </span>
-                     </span>
-                     <br>
-               <span class="about-second-line"> I recently completed my Master's in Computer Applications (MCA) from Saintgits College of Engineering and am now a dedicated software engineer at Amrita Technologies. With a strong foundation from my BCA at SB College, I find joy in every step of coding and am passionate about leveraging technology to solve real-world challenges.</span>
-               <!-- <div class="cv">
-               <a href="images/resume.pdf"> <button>Download <span class="colors">CV</span></button></a>
-            </div> -->
-            </div>
-            
+                <style>
+                  #about-role, #about-desc { transition: opacity 0.3s; }
+                </style>
+                <div class="about-first-paragraph wow">
+                    <span class="about-first-line">
+                        I'm <span class="color" id="about-role">...</span>
+                    </span>
+                    <br>
+                    <span class="about-second-line" id="about-desc">...</span>
+                </div>
             </div>
     
             </div>
@@ -181,214 +159,24 @@
 		    <div class="skills-header">
 		        My <span class="color">Skills</span>
 		    </div>
-		    <div class="skills-content" style="text-align: center;">
-		        <!-- Skill: HTML/CSS -->
-		        <div class="skill-html skill">
-		            <div class="skill-text">
-		                <div class="html">
-		                    HTML/CSS
-		                </div>
-		            </div>
-		            <div class="html-prog wow prog">
-		                <div class="html-progress wow"></div>
-		            </div>
-		        </div>
-		
-		        <!-- Skill: Python -->
-		        <div class="skill-html skill">
-		            <div class="skill-text">
-		                <div class="html">
-		                    Python
-		                </div>
-		            </div>
-		            <div class="html-prog wow prog">
-		                <div class="js-progress wow"></div>
-		            </div>
-		        </div>
-			    
-			<!-- Skill: JavaScript -->
-		        <div class="skill-html skill">
-		            <div class="skill-text">
-		                <div class="html">
-		                    VueJS
-		                </div>
-		            </div>
-		            <div class="html-prog wow prog">
-		                <div class="adobe-progress wow"></div>
-		            </div>
-		        </div>
-			    
-		        <!-- Skill: C -->
-		        <div class="skill-html skill">
-		            <div class="skill-text">
-		                <div class="html">
-		                    C
-		                </div>
-		            </div>
-		            <div class="html-prog wow prog">
-		                <div class="adobe-progress wow"></div>
-		            </div>
-		        </div>
-		
-		        <!-- Skill: Java -->
-		        <div class="skill-html skill">
-		            <div class="skill-text">
-		                <div class="html">
-		                    Java
-		                </div>
-		            </div>
-		            <div class="html-prog wow prog">
-		                <div class="php-progress wow"></div>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-
-    
+		    <div class="skills-content" style="text-align: center;" id="skills-container">
         </div>
-        <!--about end-->
+</div>
+</div>
+<!--about end-->
         <!--portfolio-->
         <div id="portfolio">
-            <div class="color-changer">
-                <div class="color-panel">
-                    <img src="images/gear.png" alt="">
-                </div>
-                <div class="color-selector">
-                    <div class="heading">Custom Colors</div>
-                    <div class="colors">
-                        <ul >
-                        <li>
-                            <a href="#0" class="color-red " title="color-red"></a>
-                        </li>
-                        <li>
-                            <a href="#0" class="color-purple" title="color-purple"></a>
-                        </li>
-                        <li>
-                            <a href="#0" class="color-malt" title="color-malt"></a>
-                        </li>
-                        <li>
-                            <a href="#0" class="color-green" title="color-green"></a>
-                        </li>
-                        <li>
-                            <a href="#0" class="color-blue" title="color-blue"></a>
-                        </li>
-                        <li>
-                            <a href="#0" class="color-orange" title="color-orange"></a>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
+
             <div class="portfolio-header"> <span class="color"> My </span> Projects
             <span class ="header-caption"> Some Of My <span class="color"> Works</span></span></div>
-		<div id="portfolio-content">
-		<!-- New Project: Zorochatbot -->
-		    <div class="portfolio portfolio-first">
-		        <div class="portfolio-image">
-		            <img src="images/ai-assistant_0.jpg" alt="portfolio-first">
-		        </div>
-		        <div class="portfolio-text">
-		            <h2>Zoro AI Chat Bot</h2>
-				<p>Zoro is an AI chat bot developed using Vue.js. It is accessible as a Progressive Web App (PWA) and can be viewed online <a href="https://l150n.github.io/zoro_ai_chatbot_beta/">here</a>.</p>
-		            <div class="button">
-		                <a href="https://github.com/L150n/zoro_ai_chatbot_beta">
-		                    <button><span class="index">View Project<i class="gg-arrow-right"></i></span></button>
-		                </a>
-		            </div>
-		        </div>
-		    </div>
-		    <!-- New Project: MealMate -->
-		    <div class="portfolio portfolio-first">
-		        <div class="portfolio-image">
-		            <img src="images/melmate.jpg" alt="portfolio-first">
-		        </div>
-		        <div class="portfolio-text">
-		            <h2>Meal Mate</h2>
-		            <p>An innovative web app for college canteens, MealMate streamlines payment processes with facial recognition and virtual wallets. The student module facilitates seamless transactions, order placements, and feedback. Canteen staff can efficiently manage menus, place orders, and access sales statistics. MealMate enhances convenience, security, and hygiene, reducing queues and workload. A user-friendly solution for colleges of all sizes.</p>
-		            <div class="button">
-		                <a href="https://github.com/L150n/mealmate">
-		                    <button><span class="index">View Project<i class="gg-arrow-right"></i></span></button>
-		                </a>
-		            </div>
-		        </div>
-		    </div>
-		
-		    <!-- Project 1 -->
-		    <div class="portfolio portfolio-first">
-		        <div class="portfolio-image">
-		            <img src="images/warehouse.jpeg" alt="portfolio-first">
-		        </div>
-		        <div class="portfolio-text">
-		            <h2>Eletronics Warehouse Management System</h2>
-		            <p>An online Electronics Warehouse Management System that allows users to manage and maintain their warehouse with ease. Developed using Python, Django, SQLite database.</p>
-		            <div class="button">
-		                <a href="https://github.com/L150n/Eletronic-Warehouse-Management">
-		                    <button><span class="index">View Project<i class="gg-arrow-right"></i></span></button>
-		                </a>
-		            </div>
-		        </div>
-		    </div>
-		
-		    <!-- Project 2 -->
-		    <div class="portfolio portfolio-second">
-		        <div class="portfolio-image">
-		            <img src="images/Telegram-Bots.png" alt="portfolio-second">
-		        </div>
-		        <div class="portfolio-text">
-		            <h2>Telegram Bot</h2>
-		            <p>Developed a Telegram Bot using Python that takes a list of files sent by the user and returns them in .zip format.</p>
-		        </div>
-		    </div>
-		
-		    <!-- Project 3 -->
-		    <div class="portfolio portfolio-third">
-		        <div class="portfolio-image">
-		            <img src="images/onlineshop.jpg" alt="portfolio-third">
-		        </div>
-		        <div class="portfolio-text">
-		            <h2>Wish List Product Price Comparison</h2>
-		            <p>An online web application that helps users get price information about a product from various e-commerce websites. Developed using Python, Django, MySQL database.</p>
-		        </div>
-		    </div>
-		</div>
-                
-                 </div>
-              
-             </div>
-        <!--portfolio end-->
+		<div id="portfolio-content" class="portfolio-dynamic-container">
+</div>
+</div>
+<!--portfolio end-->
         
         <!--contact-->
      <div id="contact">
-        <div class="color-changer">
-            <div class="color-panel">
-                <img src="images/gear.png" alt="">
-            </div>
-            <div class="color-selector">
-                <div class="heading">Custom Colors</div>
-                <div class="colors">
-                    <ul >
-                    <li>
-                        <a href="#0" class="color-red " title="color-red"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-purple" title="color-purple"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-malt" title="color-malt"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-green" title="color-green"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-blue" title="color-blue"></a>
-                    </li>
-                    <li>
-                        <a href="#0" class="color-orange" title="color-orange"></a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-            </div>
+
          <div class="contact-header">Contact <span class="color"> Me</span>
         <div class="contact-header-caption"> <span class="color"> Get</span> In Touch.</div></div>
         <div class="contact-content">
@@ -451,16 +239,64 @@
                     
      </div>
         <!--contact end-->
+        <!--Theme Switcher FAB-->
+        <div id="theme-switcher">
+            <button class="theme-fab" id="theme-fab" title="Change Theme">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
+            <div class="theme-options" id="theme-options">
+                <button data-theme="clouds" class="theme-btn active" title="Clouds Theme">
+                    <span class="theme-btn-icon">☁️</span>
+                    <span class="theme-btn-label">Clouds</span>
+                </button>
+                <button data-theme="birds" class="theme-btn" title="Birds Theme">
+                    <span class="theme-btn-icon">🐦</span>
+                    <span class="theme-btn-label">Birds</span>
+                </button>
+                <button data-theme="fog" class="theme-btn" title="Fog Theme">
+                    <span class="theme-btn-icon">🌫️</span>
+                    <span class="theme-btn-label">Fog</span>
+                </button>
+                <button data-theme="cells" class="theme-btn" title="Cells Theme">
+                    <span class="theme-btn-icon">🧬</span>
+                    <span class="theme-btn-label">Cells</span>
+                </button>
+            </div>
+        </div>
+        <!--Theme Switcher End-->
     </div>
     <!--all the divisions-->
 <script src="js/jquery.min.js"></script>
-<script src="js/particles.js"></script>
-<script src="js/particles.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
 <script src="js/index.js"></script>
-    <!--particles script-->
-    <script>
-  particlesJS("particles", {"particles":{"number":{"value":40,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});
-    </script>
-
+<script src="js/vanta-themes.js"></script>
+    <!--Terminal Easter Egg-->
+    <div id="terminal-overlay">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="terminal-title">guest@lison-portfolio: ~</div>
+            <div class="terminal-close" id="close-terminal">&times;</div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="terminal-output">
+                <div>Welcome to LisonOS v1.0.0</div>
+                <div>Type 'help' to see available commands.</div>
+            </div>
+            <div class="terminal-input-line">
+                <span class="prompt">guest@lison-portfolio:~$ </span>
+                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+            </div>
+        </div>
+    </div>
+    <script src="js/terminal.js"></script>
 </body>
 </html>

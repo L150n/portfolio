@@ -1,0 +1,69 @@
+{
+  "about": {
+    "role": "Aspiring Full Stack Dev",
+    "description": "I recently completed my Master's in Computer Applications (MCA) from Saintgits College of Engineering and am now a dedicated software engineer at Amrita Technologies. With a strong foundation from my BCA at SB College, I find joy in every step of coding and am passionate about leveraging technology to solve real-world challenges."
+  },
+  "themeSounds": {
+    "enabled": true,
+    "sounds": {
+      "clouds": "https://cdn.freesound.org/previews/389/389531_2073995-lq.mp3",
+      "birds": "https://cdn.freesound.org/previews/407/407869_8116900-lq.mp3",
+      "fog": "https://cdn.freesound.org/previews/654/654060_1648170-lq.mp3",
+      "cells": "https://cdn.freesound.org/previews/569/569970_10411709-lq.mp3"
+    }
+  },
+  "skills": [
+    {
+      "name": "HTML/CSS",
+      "rating": 6.5
+    },
+    {
+      "name": "Python",
+      "rating": 8.5
+    },
+    {
+      "name": "VueJS",
+      "rating": 7.5
+    },
+    {
+      "name": "C",
+      "rating": 7.5
+    },
+    {
+      "name": "Java",
+      "rating": 6.5
+    }
+  ],
+  "projects": [
+    {
+      "title": "Zoro AI Chat Bot",
+      "image": "images/ai-assistant_0.jpg",
+      "description": "Zoro is an AI chat bot developed using Vue.js. It is accessible as a Progressive Web App (PWA) and can be viewed online <a href='https://l150n.github.io/zoro_ai_chatbot_beta/'>here</a>.",
+      "link": "https://github.com/L150n/zoro_ai_chatbot_beta"
+    },
+    {
+      "title": "Meal Mate",
+      "image": "images/melmate.jpg",
+      "description": "An innovative web app for college canteens, MealMate streamlines payment processes with facial recognition and virtual wallets. The student module facilitates seamless transactions, order placements, and feedback. Canteen staff can efficiently manage menus, place orders, and access sales statistics. MealMate enhances convenience, security, and hygiene, reducing queues and workload. A user-friendly solution for colleges of all sizes.",
+      "link": "https://github.com/L150n/mealmate"
+    },
+    {
+      "title": "Eletronics Warehouse Management System",
+      "image": "images/warehouse.jpeg",
+      "description": "An online Electronics Warehouse Management System that allows users to manage and maintain their warehouse with ease. Developed using Python, Django, SQLite database.",
+      "link": "https://github.com/L150n/Eletronic-Warehouse-Management"
+    },
+    {
+      "title": "Telegram Bot",
+      "image": "images/Telegram-Bots.png",
+      "description": "Developed a Telegram Bot using Python that takes a list of files sent by the user and returns them in .zip format.",
+      "link": ""
+    },
+    {
+      "title": "Wish List Product Price Comparison",
+      "image": "images/onlineshop.jpg",
+      "description": "An online web application that helps users get price information about a product from various e-commerce websites. Developed using Python, Django, MySQL database.",
+      "link": ""
+    }
+  ]
+}

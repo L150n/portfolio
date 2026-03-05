@@ -6,8 +6,8 @@
   "themeSounds": {
     "enabled": true,
     "sounds": {
-      "clouds": "https://cdn.freesound.org/previews/389/389531_2073995-lq.mp3",
-      "birds": "https://cdn.freesound.org/previews/407/407869_8116900-lq.mp3",
+      "clouds": "/sounds/storm.mp3",
+      "birds": "/sounds/birds.mp3",
       "fog": "https://cdn.freesound.org/previews/654/654060_1648170-lq.mp3",
       "cells": "https://cdn.freesound.org/previews/569/569970_10411709-lq.mp3"
     }
